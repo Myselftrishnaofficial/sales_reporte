@@ -13,11 +13,11 @@ INSERT into sales values('furniture','bed',900);
 --select
 select ProductCategory,ProductName,SaleAmount from sales;
 
-SELECT 
-    ProductCategory,
+SELECT COALESCE
+    (ProductCategory,'total',ProductName,'total') AS ProductCategory,ProductName,
     SUM(SaleAmount) AS TotalSales
 FROM 
     sales
 GROUP BY 
-    ROLLUP(ProductCategory);
+    ROLLUP(ProductCategory,ProductName);
 
